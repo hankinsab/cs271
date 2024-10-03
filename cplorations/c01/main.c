@@ -135,13 +135,19 @@ double pie(long int n){
     double sum = 0;
 
     // itterate through up to n 
-    for (int i = 0; i <= n; i++){
-        
-        // do leibniz to i then add that to sum
-        double leibniz = (((-1) ^ i ) / (2 * i ) + 1);
-        sum += leibniz;
+    for (long int i = 0; i <= n; i++){
+
+        // do leibniz to i then add or take away that to sum
+        if (i%2 ==0){
+            double leibniz = (pow(1.0, i)) / (2.0 * i + 1.0);
+            sum += leibniz;
+        } else{
+            double leibniz = (pow(-1.0, i)) / (2.0 * i + 1.0);
+            sum -= leibniz;
+        }
+    
     }
-     return sum; 
+        return 4 * sum; 
 } 
 
 
