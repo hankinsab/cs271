@@ -104,7 +104,10 @@ int max(int arr[], int n)
  */
 int sum(int arr[], int n)
 {
-    /** Your CODE here **/
+    // sum value is set to 0
+    // itterate through array
+    //add current element to sum  
+
 }
 
 
