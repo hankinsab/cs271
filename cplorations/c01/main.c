@@ -77,10 +77,19 @@ int fib(int n) //fix later
  */
 int max(int arr[], int n)
 {
-    //itterate through the array 
-    //set variable max equal to first number in array, this will be replaced with highest number of comparisons 
-    //compare current number to max, set max equal to whichever is highest 
 
+    //set variable max equal to first number in array
+   int tempMax = arr[0];
+    
+    //itterate through the array 
+   for (int i = 0;  i < n; i++ ){
+
+    //compare current number to max, set max equal to whichever is highest 
+    if ( arr[i] > tempMax ){
+        tempMax = arr[i];
+    }
+   }
+   return tempMax;
 }
 
 /* Function: sum
