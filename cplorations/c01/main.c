@@ -130,7 +130,18 @@ int sum(int arr[], int n)
  *
  */
 double pie(long int n){
-    /** Your CODE here **/
+    // leibniz is ((-1)^n)/ 2n + 1
+    // create a sum equal to 0
+    double sum = 0;
+
+    // itterate through up to n 
+    for (int i = 0; i <= n; i++){
+        
+        // do leibniz to i then add that to sum
+        double leibniz = (((-1) ^ i ) / (2 * i ) + 1);
+        sum += leibniz;
+    }
+     return sum; 
 } 
 
 
