@@ -43,20 +43,24 @@ int add(int n)
  *
  * returns: Nth Fibonacci number
  */
-int fib(int n) //not done
-//need to add sum to the array of numbers, to i (recursion)
+int fib(int n) //fix later 
+    // goes through the numbers up to n and adds them 
+    //  1, 1, 2, 3, 5, 8 
+    // if n is 4, then need 1, and 1. n-1 and n-2
+    // fib(n-1) + fib (n-2)
 {
-    if (n <= 0){
-        return n;
+    if (n == 0){
+        return 0;
+    }
+
+    if (n == 1){
+        return 1; 
     }
 
     else{   
         return fib(n-1) + fib(n-2);
     }
-    // goes through the numbers up to n and adds them 
-    // 0, 1, 1, 2, 3, 5, 8 
-    // if n is 4, then need 1, and 1. n-1 and n-2
-    // fib(n-1) + fib (n-2)
+   
 
 }
  
@@ -73,7 +77,10 @@ int fib(int n) //not done
  */
 int max(int arr[], int n)
 {
-    /** Your CODE here **/
+    //itterate through the array 
+    //set variable max equal to first number in array, this will be replaced with highest number of comparisons 
+    //compare current number to max, set max equal to whichever is highest 
+
 }
 
 /* Function: sum
