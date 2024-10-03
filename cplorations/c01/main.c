@@ -105,8 +105,15 @@ int max(int arr[], int n)
 int sum(int arr[], int n)
 {
     // sum value is set to 0
+    int sum = 0; 
+
     // itterate through array
-    //add current element to sum  
+    for (int i = 0; i < n; i++){
+
+         //add current element to sum 
+        sum += arr[i];
+    }
+        return sum;
 
 }
 
