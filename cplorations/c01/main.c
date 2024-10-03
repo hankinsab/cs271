@@ -52,7 +52,9 @@ int fib(int n) //not done
         sum += i ;
     }
     // goes through the numbers up to n and adds them 
-    // fib(n-1) + fib (n+1)
+    // 0, 1, 1, 2, 3, 5,8 
+    // if n is 4, then need 1, and 1. n-1 and n-2
+    // fib(n-1) + fib (n-2)
     return sum;
 
 }
