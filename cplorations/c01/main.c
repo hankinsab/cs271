@@ -22,8 +22,10 @@
  */
 int add(int n)
 {
+    //set sum of numbers equal to 0 
     int sum = 0; 
 
+    // loops through every value up to n and adds it to the sum
     for (int i = 0; i <= n; i ++){
         sum += i;
     }
@@ -41,9 +43,18 @@ int add(int n)
  *
  * returns: Nth Fibonacci number
  */
-int fib(int n)
+int fib(int n) //not done
+//need to add sum to the array of numbers, to i (recursion)
 {
-    /** Your CODE here **/
+    int sum = 0;
+
+    for ( int i = 0; i <= n; i ++){
+        sum += i ;
+    }
+    // goes through the numbers up to n and adds them 
+    // fib(n-1) + fib (n+1)
+    return sum;
+
 }
  
  
