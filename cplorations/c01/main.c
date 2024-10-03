@@ -131,23 +131,28 @@ int sum(int arr[], int n)
  */
 double pie(long int n){
     // leibniz is ((-1)^n)/ 2n + 1
-    // create a sum equal to 0
-    double sum = 0;
+
+    // create a final pi value equal to 0
+    double pi_value = 0;
 
     // itterate through up to n 
-    for (long int i = 0; i <= n; i++){
+    for (int i = 0; i < n; i++){
 
-        // do leibniz to i then add or take away that to sum
-        if (i%2 ==0){
-            double leibniz = (pow(1.0, i)) / (2.0 * i + 1.0);
-            sum += leibniz;
+        double term_num = 0;
+
+        // do leibniz with positive sign if index number is even 
+        if (i%2 == 0){
+                term_num =  (4.0 / (2.0 * i + 1.0));
+
+        // do leibniz with negative sign if index number is odd
         } else{
-            double leibniz = (pow(-1.0, i)) / (2.0 * i + 1.0);
-            sum -= leibniz;
+                term_num =  (-4.0 / (2.0 * i + 1.0));
         }
-    
+
+        //add term number to final pi value
+        pi_value += term_num;
     }
-        return 4 * sum; 
+        return pi_value;
 } 
 
 
