@@ -50,8 +50,9 @@ int fib(int n) //not done
         return n;
     }
 
-    else   
-        return fib(n-1) + fib (n-2);
+    else{   
+        return fib(n-1) + fib(n-2);
+    }
     // goes through the numbers up to n and adds them 
     // 0, 1, 1, 2, 3, 5, 8 
     // if n is 4, then need 1, and 1. n-1 and n-2
