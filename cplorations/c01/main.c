@@ -26,7 +26,7 @@ int add(int n)
     int sum = 0; 
 
     // loops through every value up to n and adds it to the sum
-    for (int i = 0; i <= n; i ++){
+    for (int i = 0; i <= n; i++){
         sum += i;
     }
     return sum; 
