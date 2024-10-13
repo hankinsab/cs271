@@ -104,8 +104,10 @@ int vowels(char* txt) {
 	for ( int i = 0; i < length; i++){
 		if (txt[i] =='a'||txt[i] == 'e'||
 		 txt[i]== 'i'|| txt[i]== 'o'||
-		 txt[i]=='u'){
-			
+		 txt[i]=='u'|| txt[i] =='A'||txt[i] == 'E'||
+		 txt[i]== 'I'|| txt[i]== 'O'||
+		 txt[i]=='U'){
+
 			vowel += 1;
 		}
 	}
