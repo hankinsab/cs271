@@ -82,8 +82,8 @@ void reverse(char* txt, char* result) {
 		// fill result with txt, starting from the end of the string
 		*result = txt[i];
 		result += 1;
-
 	}
+	*result = '\0';
 	
 }
 
