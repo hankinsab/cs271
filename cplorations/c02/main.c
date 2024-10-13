@@ -26,7 +26,7 @@
 int length(char* txt) {
 	int len = 0;
 	
-	for( int i = 0; txt[i] != 0; i++){
+	for( int i = 0; txt[i] != '\0'; i++){
 		len+=1;
 
 	}
@@ -102,11 +102,12 @@ int vowels(char* txt) {
 	int length = strlen(txt);
 
 	for ( int i = 0; i < length; i++){
-		if (txt[i] =='a'||txt[i] == 'e'||
-		 txt[i]== 'i'|| txt[i]== 'o'||
-		 txt[i]=='u'|| txt[i] =='A'||txt[i] == 'E'||
-		 txt[i]== 'I'|| txt[i]== 'O'||
-		 txt[i]=='U'){
+		//conbverts each character to lowercase
+		char character = tolower(txt[i]);
+
+		if (character =='a'||character == 'e'||
+		 character== 'i'|| character== 'o'||
+		 character=='u'){
 
 			vowel += 1;
 		}
