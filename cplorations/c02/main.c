@@ -26,7 +26,10 @@
 int length(char* txt) {
 	int len = 0;
 	
-	/* REPLACE WITH YOUR CODE */
+	for( int i = 0; txt[i] != 0; i++){
+		len+=1;
+
+	}
 
 	return len;  
 }
