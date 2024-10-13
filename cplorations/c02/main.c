@@ -83,7 +83,7 @@ void reverse(char* txt, char* result) {
 		*result = txt[i];
 		result += 1;
 	}
-	*result = '\0';
+	 *result = '\0';
 	
 }
 
@@ -99,8 +99,13 @@ void reverse(char* txt, char* result) {
  */
 int vowels(char* txt) {
 	int vowel = 0;
+	int length = strlen(txt);
 
-	/* REPLACE WITH YOUR CODE */
+	for ( int i; i <= length; i++){
+		if (*txt) = "a", "e", "i", "o", "u"{
+			vowel += 1;
+		}
+	}
 
 	return vowel;
 }
