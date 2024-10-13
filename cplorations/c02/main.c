@@ -135,16 +135,16 @@ int quartile(char* name) {
 
 	char character = tolower(name[0]);
 
-	if (strcmp(character, "a") >= 0 && (strcmp(character, "f")) <= 0){
+	if (strcmp(&character, "a") >= 0 && (strcmp(&character, "f")) <= 0){
 		return 1; 
 	}
-	else if (strcmp(character, "g") >= 0 && (strcmp(character, "l")) <= 0){
+	else if (strcmp(&character, "g") >= 0 && (strcmp(&character, "l")) <= 0){
 		return 2; 
 	}
-	else if (strcmp(character, "m") >= 0 && (strcmp(character, "r")) <= 0){
+	else if (strcmp(&character, "m") >= 0 && (strcmp(&character, "r")) <= 0){
 		return 3; 
 	}
-	else if (strcmp(character, "s") >= 0 && (strcmp(character, "z")) <= 0){
+	else if (strcmp(&character, "s") >= 0 && (strcmp(&character, "z")) <= 0){
 		return 4; 
 	}
 	else {return -1;} 
