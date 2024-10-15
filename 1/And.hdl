@@ -11,5 +11,8 @@ CHIP And {
     OUT out;
     
     PARTS:
-    //// Replace this comment with your code.
+    //left hand side is our a 
+    //connecting it to nand's a and b
+    Nand( a = a, b = b, out = nandout);
+    Not(in = nandout, out =  out);
 }
