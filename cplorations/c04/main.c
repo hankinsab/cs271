@@ -22,7 +22,7 @@ FILE *fin = fopen(argv[1], "r");
 	}
 
 parse(fin);
-flcose(fin);
+fclose(fin);
 }
 
 
