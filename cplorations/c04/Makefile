@@ -1,5 +1,5 @@
 CC = gcc
-CDFLAGS = Wall -I.
+CDFLAGS = -Wall -I.
 LDFLAGS =
 OBJFILES = main.o parser.o
 TARGET = main
