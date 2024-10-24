@@ -21,16 +21,17 @@ char *strip(char *s){
 	int i = 0; 
 
 	for (char *s2 = s; *s2; s2++ ){
-		if (*s2 == '/' & *(s2+1) == '/'){
+		if ((*s2 == '/') && (*(s2+1) == '/')){
 			break; 
 		}
-		else if(!isspace(*s2)){
+		
+		if(!isspace(*s2)){
 			s_new[i++] = *s2;
 		}
 	}
 
 	s_new[i] = '\0';
-	strcpy(s_new, s);
+	strcpy(s, s_new);
     return s;	
 }
 
@@ -49,9 +50,11 @@ void parse(FILE * file){
 		strip(line);
 
 		//if line is not blank, print the line
-		if (*line != '\0'){
-			printf("%s\n", line);
+		if (!*line){
+			continue;
 		}
+		
+		printf("%s\n", line);
 	}
 
 }
