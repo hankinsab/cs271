@@ -10,9 +10,24 @@
  * else              out(t+1) = out(t)
  */
 CHIP PC {
-    IN in[16],inc, load, reset;
+    IN in[16], reset, load, inc;
     OUT out[16];
     
     PARTS:
-    //// Replace this comment with your code.
+
+
+    //increment register output
+    Inc16(in=regOut , out=incRegOut );
+
+    //select current reg output or incremented output given signal inc
+    Mux16(a=regOut , b=incRegOut , sel=inc , out=incrementOut );
+
+    // select between prevous output and input given load
+    Mux16(a=incrementOut , b=in , sel=load , out=loadOut );
+
+    // select between prevous (load selector output) and zero given reset
+    Mux16(a=loadOut , b=false , sel=reset , out=finalOut );
+
+    // regester updated, cycles back to next increment 
+    Register(in=finalOut , load=true , out=out, out=regOut );
 }
