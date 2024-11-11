@@ -1,11 +1,13 @@
 // This file is part of www.nand2tetris.org
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
-// File name: projects/04/Fill.asm
+// File name: projects/4/Fill.asm
 
-// This program runs an infinite loop that listens to the keyboard input.
-// - When a key is pressed (any key), the program blackens the screen (fills with black pixels).
-// - When no key is pressed (KBD == 0), the program clears the screen (fills with white pixels).
+// Runs an infinite loop that listens to the keyboard input. 
+// When a key is pressed (any key), the program blackens the screen,
+// i.e. writes "black" in every pixel. When no key is pressed, 
+// the screen should be cleared.
+
 
 // Initialize constants and variables
 @8192           // Set the constant value of 8192 (total number of pixels on the screen)
@@ -13,7 +15,7 @@ D=A
 @totalPixels   // Store the total pixel count 
 M=D            
 
-// Main program loop: Repeatedly checks for keyboard input
+// check input
 (START)
     @KBD               
     D=M               // Read the keyboard value into D, 0 if no key pressed
