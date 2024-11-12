@@ -22,34 +22,50 @@ M=D
     @FILL_BLACK     // If any key is pressed, jump to black screen section
     D;JNE
     @FILL_WHITE     // If no key is presse, jump to white 
-    D;JEQ
+    0;JMP
 
 // Paint the entire screen black (when a key is pressed)
 (FILL_BLACK)
+    @0
+    D=A
     @counter     // Initialize pixel counter to 0
-    M=0              
+    M=D             
 (BLACK_LOOP)   
     @counter     // Load the current pixel index into D
     D=M
     @SCREEN         
     A=D+A            // Add the pixel index to the base address to get the correct memory location
-    M=-1              // Set the current pixel to black
+    M=-1            // Set the current pixel to black
+    @counter          
+    M=M+1             //increment counter by 1
     @totalPixels   
-    D=D+1             // Increment the counter by 1
-    @counter
-    M=D               // Store the new pixel counter value
-    @8192            
-    D=D-A             // Subtract current pixel index from total pixel count
+    D=M               // new pixel counter value
+    @counter           
+    D=D-M            // Subtract current pixel index from total pixel count
     @BLACK_LOOP         // If D != 0, loop
-    D;JNE
+    D;JLT
     @START    // Once the screen is painted black, go back to the main loop to check keyboard input
     0;JMP
 
 // Paint the entire screen white when no key is pressed
 (FILL_WHITE)
-    @pixelCounterWhite  // Initialize a separate counter for white 
-    M=0                 // Start the counter from 0 
+    @0
+    D=A
+    @counter  // Initialize the counter for white 
+    M=D             // Start the counter from 0 
 (WHITE_LOOP)    
-    @pixelCounterWhite  // Load the current pixel index into D
+    @counter  // Load the current pixel index into D
     D=M
     @SCREEN 
+    A=D+A     //Add the pixel index to the base address to get the correct memory location
+    M=0       //set to white 
+    @counter 
+    M=M+1      //increment counter by 1 
+    @totalPixels
+    D=M         //total pixel count
+    @counter 
+    D=D-M      //check if counter is equal to pixel count 
+    @WHITE_LOOP
+    D;JLT       //if not, loop back to white 
+    @START
+    0;JMP
