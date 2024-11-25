@@ -32,5 +32,56 @@ CHIP CPU {
         pc[15];          // address of next instruction
 
     PARTS:
-	//// Replace this comment with your code.
+    //control/ instruction type 
+    Not(in=instruction[15] , out=aInstr );
+    Not(in=aInstr , out=cInstr );
+
+    //C instruction going to A register 
+    And(a=cInstr , b=instruction[5] , out=aALU );
+
+    // a register  
+    Mux16(a=instruction, b=ALUout, sel=aALU , out=ARegIn );
+
+    // load a register 
+    Or(a=aInstr , b=aALU , out=loadA );  //check if it is for a register
+    ARegister(in=ARegIn , load=loadA , out=Aout );
+
+    //A or M 
+    Mux16(a=Aout , b=inM , sel=instruction[12] , out=AorMout );
+
+    // load to D register if signaled 
+    And(a=cInstr , b=instruction[4] , out=dLoad );  //d to c 
+    DRegister(in=ALUout , load=dLoad , out=outD ); //go to alu if active 
+
+    //ALU
+    ALU(x=outD, y=AorMout, zx=instruction[11], nx=instruction[10],
+        zy=instruction[9], ny=instruction[8], f=instruction[7],
+        no=instruction[6], out=ALUout, zr=zrOut, ng=ngOut);
+
+    //memory outputs
+    Or16(a=false , b=Aout , out[0..14]=addressM );  //memory address
+    Or16(a=false , b=ALUout , out=outM );   //alu output to outM
+    And(a=cInstr , b=instruction[3] , out=writeM );  //writeM if c instruction says so 
+
+
+    //PC
+    And(a=zrOut , b=instruction[1] , out=jeq ); //jmp if alu is 0
+    And(a=ngOut , b=instruction[2] , out=jlt ); //jmp if alu is negative
+    //check if alu is positive
+    Or(a=zrOut , b=ngOut , out=zrOrNg );
+    Not(in=zrOrNg , out=positive );
+    And(a=positive , b=instruction[0] , out=jgt ); //jmp if positive 
+
+    //did it jump?
+    Or(a=jeq , b=jlt , out=jle );
+    Or(a=jle , b=jgt , out=jmpToA );
+
+    //load pc if it jumped and is a c instr
+    And(a=cInstr , b=jmpToA , out=loadPC );
+    Not(in=loadPC , out=incPC );
+    PC(in=Aout , load=loadPC , inc=incPC , reset=reset , out[0..14]=pc );
+
+
+
+
 }
