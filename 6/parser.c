@@ -244,6 +244,8 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
 	
 	FILE *file =fopen(new_file_name, "w");
 
+	hack_addr next_address = 16; 
+
 	
 
 	for (int i = 0; i < num_instructions; i++ ){
@@ -252,17 +254,21 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
 			if (instructions[i].a.is_addr){
 				instr_opcode = instructions[i].a.address;
 			}else{
-				
+				Symbol *symbol = symtable_find(instructions[i].a.label);
+				if (symbol == NULL){
+					symtable_insert(instructions[i].a.label, next_address);
+					next_address ++;
+				}else {
+					next_address = symbol->address; 
+				}
+				free(instructions[i].a.label);
 			}
-
-
-
+		}else{ //C-Type 
+			//TODO
+			instr_opcode = instruction_to_opcode();
 		}
-
 	}
+	//TODO print he 16 character %c opcode using macro OPCODE_TO_BINARY (explained below)
 
-
-
-
-
+	fclose(fout);
 }
