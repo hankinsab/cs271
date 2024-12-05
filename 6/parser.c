@@ -233,6 +233,28 @@ void parse_C_instruction(char *line, c_instruction *instr){
 
 }
 
+opcode instruction_to_opcode(c_instruction instr){
+	opcode op = 0; 
+
+	//111 
+	op |= (7 << 13);
+
+	//a bit 
+	op |= (instr.a << 12);
+
+	//comp bit
+	op |= (instr.comp << 6);
+
+	//dest bits
+	op |= (instr.dest <<3);
+
+	//jump bits 
+	op |= instr.jump;
+
+	return op; 
+
+}
+
 void assemble(const char * file_name, instruction* instructions, int num_instructions){
 	
 	// allocates memory for the new file name, then opens that file 
@@ -265,7 +287,7 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
 			}
 		}else{ //C-Type 
 			//TODO
-			instr_opcode = instruction_to_opcode();
+			instr_opcode = instruction_to_opcode(instructions[i].c);
 		}
 	}
 	//TODO print he 16 character %c opcode using macro OPCODE_TO_BINARY (explained below)
