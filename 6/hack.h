@@ -16,7 +16,7 @@
 #define NUM_PREDEFINED_SYMBOLS 23
 #define MAX_PREDEFINED_SYMBOL_LENGTH 10
 
-#define OPCODE_TO_BINARY(opcode)  \
+#define OPCODE_TO_BINARY(opcode) \
   (opcode & 0x8000 ? '1' : '0'), \
   (opcode & 0x4000 ? '1' : '0'), \
   (opcode & 0x2000 ? '1' : '0'), \
