@@ -1,7 +1,9 @@
 /****************************************
  * C-ploration 10 for CS 271
  * 
- * [NAME] Abbey Hankins
+
+
+
  * [TERM] FALL 2024
  * 
  ****************************************/
@@ -86,7 +88,7 @@ int parse(FILE * file, instruction *instructions){
 			}
 
 			instr.type = C_type; 
-			printf("C: d=%d, c=%d, j=%d\n", instr.c.dest, instr.c.comp, instr.c.jump);
+			//printf("C: d=%d, c=%d, j=%d\n", instr.c.dest, instr.c.comp, instr.c.jump);
 			
 		}
 
@@ -226,10 +228,13 @@ void parse_C_instruction(char *line, c_instruction *instr){
 	
 	
 
-	int a;
+	int a = 0;
 	instr->jump = (jump !=NULL) ? str_to_jumpid(jump) : JMP_NULL;
 	instr->dest = (dest != NULL) ? (str_to_destid(dest)) : DEST_NULL;
 	instr->comp = (comp != NULL) ? str_to_compid(comp, &a): COMP_INVALID; 
+	instr->a = (a == 1) ? 1 : 0;
+
+	printf("Debug - parse_C_instruction: a=%d, comp=%d, dest=%d, jump=%d\n",instr->a, instr->comp, instr->dest, instr->jump);
 
 }
 
@@ -240,18 +245,21 @@ opcode instruction_to_opcode(c_instruction instr){
 	op |= (7 << 13);
 
 	//a bit 
-	op |= (instr.a << 12);
+	
+	op |= ((uint16_t)instr.a <<12);
 
 	//comp bit
-	op |= (instr.comp << 6);
+	op |= ((uint16_t)instr.comp << 6);
 
 	//dest bits
-	op |= (instr.dest <<3);
+	op |= ((uint16_t)instr.dest << 3);
 
 	//jump bits 
-	op |= instr.jump;
+	op |= (uint16_t)instr.jump;
 
-	return op; 
+	printf("Debug - instruction_to_opcode: op=%d (binary: %016b)\n", op, op);
+    return op;
+	 
 
 }
 
@@ -272,6 +280,7 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
 
 	for (int i = 0; i < num_instructions; i++ ){
 		opcode instr_opcode;
+
 		if (instructions[i].type == A_type){
 			if (instructions[i].a.is_addr){
 				instr_opcode = instructions[i].a.address;
@@ -279,18 +288,19 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
 				Symbol *symbol = symtable_find(instructions[i].a.label);
 				if (symbol == NULL){
 					symtable_insert(instructions[i].a.label, next_address);
-					next_address ++;
+					instr_opcode = next_address ++;
 				}else {
-					next_address = symbol->address; 
+					instr_opcode = symbol->address; 
 				}
 				free(instructions[i].a.label);
 			}
 		}else{ //C-Type 
-			//TODO
 			instr_opcode = instruction_to_opcode(instructions[i].c);
 		}
+		//TODO print he 16 character %c opcode using macro OPCODE_TO_BINARY (explained below)
+		fprintf(file, "%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n", OPCODE_TO_BINARY(instr_opcode));
 	}
-	//TODO print he 16 character %c opcode using macro OPCODE_TO_BINARY (explained below)
 
+	free(new_file_name);
 	fclose(file);
 }
