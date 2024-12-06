@@ -232,7 +232,6 @@ void parse_C_instruction(char *line, c_instruction *instr){
 	instr->comp = (comp != NULL) ? str_to_compid(comp, &a): COMP_INVALID; 
 	instr->a = (a == 1) ? 1 : 0;
 
-	printf("Debug - parse_C_instruction: a=%d, comp=%d, dest=%d, jump=%d\n",instr->a, instr->comp, instr->dest, instr->jump);
 
 }
 
@@ -243,6 +242,7 @@ opcode instruction_to_opcode(c_instruction instr){
 	op |= (7 << 13);
 
 	//a bit 
+	
 	op |= ((uint16_t)instr.a << 12);
 
 	//comp bit
@@ -253,9 +253,6 @@ opcode instruction_to_opcode(c_instruction instr){
 
 	//jump bits 
 	op |= (uint16_t)instr.jump;
-
-	printf("Debug - instruction_to_opcode: op=%d (binary: %016b)\n", op, op);
-    return op;
 	 
 
 }
