@@ -234,8 +234,7 @@ void parse_C_instruction(char *line, c_instruction *instr){
 	instr->comp = (comp != NULL) ? str_to_compid(comp, &a): COMP_INVALID; 
 	instr->a = (a == 1) ? 1 : 0;
 
-	printf("Debug - parse_C_instruction: a=%d, comp=%d, dest=%d, jump=%d\n",instr->a, instr->comp, instr->dest, instr->jump);
-
+	
 }
 
 opcode instruction_to_opcode(c_instruction instr){
@@ -257,7 +256,7 @@ opcode instruction_to_opcode(c_instruction instr){
 	//jump bits 
 	op |= (uint16_t)instr.jump;
 
-	printf("Debug - instruction_to_opcode: op=%d (binary: %016b)\n", op, op);
+	
     return op;
 	 
 
@@ -297,7 +296,7 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
 		}else{ //C-Type 
 			instr_opcode = instruction_to_opcode(instructions[i].c);
 		}
-		//TODO print he 16 character %c opcode using macro OPCODE_TO_BINARY (explained below)
+		
 		fprintf(file, "%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n", OPCODE_TO_BINARY(instr_opcode));
 	}
 
